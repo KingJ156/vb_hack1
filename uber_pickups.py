@@ -19,5 +19,18 @@ number2 = st.number_input(
 )
 
 if number1 is not None and number2 is not None:
-    total = number1 + number2
-    st.write("The answer is", total)
+
+    if st.button("Add"):
+        st.write("Answer:", number1 + number2)
+
+    if st.button("Subtract"):
+        st.write("Answer:", number1 - number2)
+
+    if st.button("Multiply"):
+        st.write("Answer:", number1 * number2)
+
+    if st.button("Divide"):
+        if number2 != 0:
+            st.write("Answer:", number1 / number2)
+        else:
+            st.write("Cannot divide by zero.")
