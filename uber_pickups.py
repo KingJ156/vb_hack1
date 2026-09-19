@@ -10,5 +10,14 @@ if st.button('Say hello'):
 else:
      st.write('Goodbye')
 
-number = st.number_input("Insert a number")
-st.write("The current number is ", number)
+number1 = st.number_input(
+    "Enter the first number", value=None, placeholder="Type a number..."
+)
+
+number2 = st.number_input(
+    "Enter the second number", value=None, placeholder="Type a number..."
+)
+
+if number1 is not None and number2 is not None:
+    total = number1 + number2
+    st.write("The answer is", total)
