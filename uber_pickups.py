@@ -25,17 +25,19 @@ operation = st.selectbox(
 
 if number1 is not None and number2 is not None:
 
-    if st.button("Add"):
-        st.write("Answer:", number1 + number2)
+    if operation == "Add":
+        answer = number1 + number2
 
-    if st.button("Subtract"):
-        st.write("Answer:", number1 - number2)
+    elif operation == "Subtract":
+        answer = number1 - number2
 
-    if st.button("Multiply"):
-        st.write("Answer:", number1 * number2)
+    elif operation == "Multiply":
+        answer = number1 * number2
 
-    if st.button("Divide"):
+    elif operation == "Divide":
         if number2 != 0:
-            st.write("Answer:", number1 / number2)
+            answer = number1 / number2
         else:
-            st.write("Cannot divide by zero.")
+            answer = "Cannot divide by zero."
+
+    st.write("Answer:", answer)
