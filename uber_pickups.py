@@ -58,11 +58,38 @@ name = st.text_input("Name")
 
 if st.button("Search"):
     try:
-            res = fetch_pokemon(name)
+            # Name and ID
+        st.subheader(f"#{res['id']} {res['name'].capitalize()}")
 
-            st.write("ID:", res["id"])
-            st.write("Name:", res["name"])
-            st.write("Weight:", res["weight"])
-            st.write("Ability:", res["abilities"][0]["ability"]["name"])
+        # Type
+        types = []
+
+        for type_info in res["types"]:
+            types.append(type_info["type"]["name"].capitalize())
+
+        st.write("Type:", ", ".join(types))
+
+        # Height and weight
+        height = res["height"] / 10
+        weight = res["weight"] / 10
+
+        st.write("Height:", height, "m")
+        st.write("Weight:", weight, "kg")
+
+        # Base stats
+        st.subheader("Base stats")
+
+        for stat_info in res["stats"]:
+            stat_name = stat_info["stat"]["name"]
+            stat_value = stat_info["base_stat"]
+
+            st.write(
+                stat_name.capitalize() + ":",
+                stat_value
+            )
+
     except requests.HTTPError:
-            st.error("Pokémon not found!")
+        st.error("Pokémon not found!")
+
+    except requests.RequestException:
+        st.error("Could not connect to PokéAPI.")
