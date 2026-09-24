@@ -51,3 +51,18 @@ def fetch_pokemon(name_or_id: str, timeout: float = 6) -> dict:
     r = requests.get(f"{BASE_URL}/{str(name_or_id).strip().lower()}", timeout=timeout)
     r.raise_for_status()
     return r.json()
+
+st.title("Pokémon Search")
+
+name = st.text_input("Name")
+
+if st.button("Search"):
+    try:
+            res = fetch_pokemon(name)
+
+            st.write("ID:", res["id"])
+            st.write("Name:", res["name"])
+            st.write("Weight:", res["weight"])
+            st.write("Ability:", res["abilities"][0]["ability"]["name"])
+    except requests.HTTPError:
+            st.error("Pokémon not found!")
