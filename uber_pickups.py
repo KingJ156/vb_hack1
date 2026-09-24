@@ -18,6 +18,11 @@ number2 = st.number_input(
     "Enter the second number", value=None, placeholder="Type a number..."
 )
 
+operation = st.selectbox(
+    "Choose an operation",
+    ["Add", "Subtract", "Multiply", "Divide"]
+)
+
 if number1 is not None and number2 is not None:
 
     if st.button("Add"):
