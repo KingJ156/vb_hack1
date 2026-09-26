@@ -68,7 +68,17 @@ if st.button("Search"):
         try:
             res = fetch_pokemon(name)
 
-            st.subheader(
+            col1, col2 = st.columns(2)
+
+
+            with col1:
+                st.image(
+                    res["sprites"]["front_default"],
+                    width=150
+                )
+
+            with col2: 
+                st.subheader(
                 f"#{res['id']} {res['name'].capitalize()}"
             )
 
@@ -92,15 +102,18 @@ if st.button("Search"):
             # Base stats
             st.subheader("Base stats")
 
-            for stat_info in res["stats"]:
+            stats_column = st.column(6)
+            for i in range(6):
+                stat_info = res["stats"][i]
+                
 
                 stat_name = stat_info["stat"]["name"]
                 stat_value = stat_info["base_stat"]
-
-                st.write(
-                    stat_name.capitalize() + ":",
-                    stat_value
-                )
+                with stat_column[i]:
+                    st.write(
+                        stat_name.capitalize() + ":",
+                        stat_value
+                    )
 
         except requests.HTTPError:
             st.error("Pokémon not found!")
