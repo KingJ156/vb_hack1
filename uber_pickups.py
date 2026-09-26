@@ -83,21 +83,21 @@ if st.button("Search"):
             )
 
             # Type
-            types = []
+                types = []
 
-            for type_info in res["types"]:
-                types.append(
-                    type_info["type"]["name"].capitalize()
-                )
+                for type_info in res["types"]:
+                    types.append(
+                        type_info["type"]["name"].capitalize()
+                    )
 
-            st.write("Type:", ", ".join(types))
+                st.write("Type:", ", ".join(types))
 
-            # Height and weight
-            height = res["height"] / 10
-            weight = res["weight"] / 10
+                # Height and weight
+                height = res["height"] / 10
+                weight = res["weight"] / 10
 
-            st.write("Height:", height, "m")
-            st.write("Weight:", weight, "kg")
+                st.write("Height:", height, "m")
+                st.write("Weight:", weight, "kg")
 
             # Base stats
             st.subheader("Base stats")
