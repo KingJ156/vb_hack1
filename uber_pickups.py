@@ -102,7 +102,7 @@ if st.button("Search"):
             # Base stats
             st.subheader("Base stats")
 
-            stats_column = st.column(6)
+            stats_column = st.columns(6)
             for i in range(6):
                 stat_info = res["stats"][i]
                 
