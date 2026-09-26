@@ -54,42 +54,56 @@ def fetch_pokemon(name_or_id: str, timeout: float = 6) -> dict:
 
 st.title("Pokémon Search")
 
-name = st.text_input("Name")
+name = st.text_input(
+    "Pokémon name or number",
+    placeholder="Example: pikachu"
+)
 
 if st.button("Search"):
-    try:
-            # Name and ID
-        st.subheader(f"#{res['id']} {res['name'].capitalize()}")
 
-        # Type
-        types = []
+    if name == "":
+        st.warning("Please enter a Pokémon name or number.")
 
-        for type_info in res["types"]:
-            types.append(type_info["type"]["name"].capitalize())
+    else:
+        try:
+            res = fetch_pokemon(name)
 
-        st.write("Type:", ", ".join(types))
-
-        # Height and weight
-        height = res["height"] / 10
-        weight = res["weight"] / 10
-
-        st.write("Height:", height, "m")
-        st.write("Weight:", weight, "kg")
-
-        # Base stats
-        st.subheader("Base stats")
-
-        for stat_info in res["stats"]:
-            stat_name = stat_info["stat"]["name"]
-            stat_value = stat_info["base_stat"]
-
-            st.write(
-                stat_name.capitalize() + ":",
-                stat_value
+            st.subheader(
+                f"#{res['id']} {res['name'].capitalize()}"
             )
 
-    except requests.HTTPError:
-        st.error("Pokémon not found!")
+            # Type
+            types = []
 
-    except requests.RequestException:
-        st.error("Could not connect to PokéAPI.")
+            for type_info in res["types"]:
+                types.append(
+                    type_info["type"]["name"].capitalize()
+                )
+
+            st.write("Type:", ", ".join(types))
+
+            # Height and weight
+            height = res["height"] / 10
+            weight = res["weight"] / 10
+
+            st.write("Height:", height, "m")
+            st.write("Weight:", weight, "kg")
+
+            # Base stats
+            st.subheader("Base stats")
+
+            for stat_info in res["stats"]:
+
+                stat_name = stat_info["stat"]["name"]
+                stat_value = stat_info["base_stat"]
+
+                st.write(
+                    stat_name.capitalize() + ":",
+                    stat_value
+                )
+
+        except requests.HTTPError:
+            st.error("Pokémon not found!")
+
+        except requests.RequestException:
+            st.error("Could not connect to PokéAPI.")
