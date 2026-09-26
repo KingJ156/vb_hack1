@@ -102,14 +102,14 @@ if st.button("Search"):
             # Base stats
             st.subheader("Base stats")
 
-            stats_column = st.columns(6)
+            stat_columns = st.columns(6)
             for i in range(6):
                 stat_info = res["stats"][i]
                 
 
                 stat_name = stat_info["stat"]["name"]
                 stat_value = stat_info["base_stat"]
-                with stat_column[i]:
+                with stat_columns[i]:
                     st.write(
                         stat_name.capitalize() + ":",
                         stat_value
